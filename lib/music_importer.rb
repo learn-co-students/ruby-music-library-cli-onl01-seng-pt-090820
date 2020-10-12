@@ -12,4 +12,8 @@ class MusicImporter
         # Dir.entries(@path).select {|p| p.include?(".mp3")}
         Dir.glob("#{path}/*mp3").map {|filepath| filepath.gsub("./spec/fixtures/mp3s/", "")}
     end
+
+    def import
+        files.each {|filename| Song.create_from_filename(filename)}
+    end
 end
