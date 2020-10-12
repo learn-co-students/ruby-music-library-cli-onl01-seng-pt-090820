@@ -30,8 +30,8 @@ class Artist
         if song.artist && !self.songs.include?(song)
             self.songs << song
         elsif !self.songs.include?(song)
-            song.artist = self
             self.songs << song
+            song.artist = self
         end
     end
 

@@ -33,6 +33,8 @@ class Song
         if artist && !artist.songs.include?(self)
             @artist = artist
             artist.add_song(self)
+        elsif artist
+            @artist = artist
         end
     end
 end
