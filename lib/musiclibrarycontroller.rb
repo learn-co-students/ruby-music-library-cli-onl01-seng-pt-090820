@@ -1,8 +1,8 @@
 class MusicLibraryController
     attr_reader :library
     def initialize(path = "./db/mp3s")
-        @library = MusicImporter.new(path).import                 #old attempt
-        # MusicImporter.new(path).import                              #second_attempt
+        # @library = MusicImporter.new(path).import                 #old attempt
+        MusicImporter.new(path).import                              #second_attempt
 
     end
 
@@ -20,20 +20,24 @@ class MusicLibraryController
             call unless user_input == "exit"
     end
 
-    def list_songs        #old attempt
-        # binding.pry
-        filename_array = self.library.collect {|filename| filename.gsub(".mp3","")}
-        filename_nested_array = filename_array.collect {|song| song.split(" - ")}
-        sorted_nested_array = filename_nested_array.sort_by {|song_array| song_array[1]}
-        sorted_library = sorted_nested_array.collect {|song_array| song_array.join(" - ")}
-        sorted_library.each_with_index {|item, i| puts "#{i+1}. #{item}"}
-    end
-
-    # def list_songs      #2nd attempt
+    # def list_songs        #old attempt
     #     # binding.pry
-    #     songs_by_name = Song.all.sort_by {|song| song.name}
-    #     songs_by_name.each_with_index {|song, i| puts "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    #     filename_array = self.library.collect {|filename| filename.gsub(".mp3","")}
+    #     filename_nested_array = filename_array.collect {|song| song.split(" - ")}
+    #     sorted_nested_array = filename_nested_array.sort_by {|song_array| song_array[1]}
+    #     @sorted_library = sorted_nested_array.collect {|song_array| song_array.join(" - ")}
+    #     @sorted_library.each_with_index {|item, i| puts "#{i+1}. #{item}"}
     # end
 
-    
+    def list_songs      #2nd attempt
+        # binding.pry
+        songs_by_name = Song.all.sort_by {|song| song.name}
+        songs_by_name.each_with_index {|song, i| puts "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    end
+
+    def list_artists
+        binding.pry
+        artists_names_sorted = Artist.all.collect {|artist| artist.name}.sort
+        artists_names_sorted.each_with_index {|artist_name, i| puts "#{i+1}. #{artist_name}"}
+    end
 end
