@@ -59,10 +59,10 @@ class Song
 
     def self.new_from_filename(filename)
         # binding.pry
-        song_array = filename.split(" - ").map {|song_element| song_element.gsub(".mp3","")}        
-        song_artist = song_array[0]
-        song_name = song_array[1]
-        song_genre = song_array[2]
+        @@song_array = filename.split(" - ").map {|song_element| song_element.gsub(".mp3","")}        
+        song_artist = @@song_array[0]
+        song_name = @@song_array[1]
+        song_genre = @@song_array[2]
         new_song = self.find_or_create_by_name(song_name)
         new_song.artist = Artist.find_or_create_by_name(song_artist)
         new_song.genre = Genre.find_or_create_by_name(song_genre)
@@ -71,5 +71,9 @@ class Song
 
     def self.create_from_filename(filename)
         self.new_from_filename(filename)
+    end
+
+    def self.song_array
+        @@song_array
     end
 end

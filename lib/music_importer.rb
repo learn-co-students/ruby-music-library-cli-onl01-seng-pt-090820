@@ -9,8 +9,8 @@ class MusicImporter
 
     def files
         # binding.pry
-        # Dir.entries(@path).select {|p| p.include?(".mp3")}
-        Dir.glob("#{path}/*mp3").map {|filepath| filepath.gsub("./spec/fixtures/mp3s/", "")}
+        Dir.entries(@path).select {|p| p.include?(".mp3")}
+        # Dir.glob("#{path}/*mp3").map {|filepath| filepath.gsub("./spec/fixtures/mp3s/", "")}  # hardcoded and fails print_songs in spec 011?
     end
 
     def import
