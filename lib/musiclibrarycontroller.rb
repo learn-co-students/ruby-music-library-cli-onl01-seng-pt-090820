@@ -36,7 +36,7 @@ class MusicLibraryController
     end
 
     def list_artists
-        binding.pry
+        # binding.pry
         artists_names_sorted = Artist.all.collect {|artist| artist.name}.sort
         artists_names_sorted.each_with_index {|artist_name, i| puts "#{i+1}. #{artist_name}"}
     end
