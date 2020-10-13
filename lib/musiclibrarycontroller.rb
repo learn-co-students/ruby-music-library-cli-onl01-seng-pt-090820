@@ -68,6 +68,10 @@ class MusicLibraryController
         end
     end
 
+    def songs_by_name
+        Song.all.sort_by {|song| song.name}
+    end
+
     def play_song
         puts "Which song number would you like to play?"
         song_number = gets.strip.to_i
