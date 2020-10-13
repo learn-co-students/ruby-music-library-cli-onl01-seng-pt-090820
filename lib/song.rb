@@ -1,4 +1,3 @@
-require 'pry'
 class Song
   extend Concerns::Findable
 
@@ -53,7 +52,6 @@ class Song
   def self.create_from_filename(filename)
     new_song = self.new_from_filename(filename)
     self.create(new_song)
-    binding.pry
   end
 
 end
