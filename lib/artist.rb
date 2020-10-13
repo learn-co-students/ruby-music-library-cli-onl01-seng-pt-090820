@@ -3,13 +3,13 @@ class Artist
   attr_reader :songs
     @@all = []
   
-  def self.all
-    @@all
-  end
-  
   def initialize(name)
     @name = name
     @songs = []
+  end
+  
+  def self.all
+    @@all
   end
   
   def save
@@ -25,13 +25,15 @@ class Artist
     new_song.save
     new_song
   end
-  
+
+
   def add_song(song)
-    if !song.artist
-      song.artist = self
-      @songs << song
-    end
+    song.artist = self unless song.artist == self
+    @songs << song unless @songs.include?(song)
   end
   
+  def genres
+    self.songs.collect{|song| song.genre}
+  end
   
 end
