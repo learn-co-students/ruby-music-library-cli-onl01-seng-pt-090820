@@ -6,13 +6,19 @@ class MusicImporter
   
   def initialize(path)
     @path = path
-    @files =[]
+    @files = []
     @files << self
   end
   
-  def files
+ def files
     Dir.glob("#{path}/*.mp3").collect do |filepath|
-      filepath.gsub("./spec/fixtures/mp3s/", "")
+      filepath.split("/").last
+    end
+  end
+  
+  def import
+    self.files.each do |file|
+      Song.create_from_filename(file)
     end
   end
 
