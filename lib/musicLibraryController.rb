@@ -52,15 +52,31 @@ class MusicLibraryController
     puts "Please enter the name of an artist:"
     artist_name = gets.chomp
     if Artist.find_by_name(artist_name)
-      artist = Artist.find_by_name(artist_name)
-      alphabatized_artist_songs = artist.songs.sort
-        binding.pry
+      name = Artist.find_by_name(artist_name)
+      alphabatized_artist_songs = name.songs.sort_by(&:name)
       alphabatized_artist_songs.each.with_index(1) do |song, index| 
-        puts "#{index}. #{song}"
+        puts "#{index}. #{song.name} - #{song.genre.name}"
       end
     else 
       "There is no artist by that name in music library"
     end
   end
+  
+  def list_songs_by_genre 
+    puts "Please enter the name of a genre:"
+    input_genre = gets.chomp 
+    if Genre.find_by_name(input_genre)
+      # binding.pry
+      alphabatized = Song.all.sort_by(&:name)
+      alphabatized.each do |song|
+        counter = 1
+        if song.genre.name == input_genre 
+          puts "#{counter}. #{song.artist.name} - #{song.name}"
+          counter += 1
+        end
+      end 
+    end 
+  end
+    
   
 end
